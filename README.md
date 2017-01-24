@@ -67,36 +67,34 @@ That being said, let's jump into the specifics.
 
 ## Documentation
 
-### `Grid(cols, rows)`
-Creates a new `Grid` object with the specified dimensions.
-
+### Factory
 ```javascript
 // NOTE: `Grid` is a factory, not a constructor.
 //       This helps the source stay clean and concise.
-var world = Grid(16, 15)
+var world = Grid(cols, rows)
 ```
+Creates and returns a new `Grid` object with the specified dimensions.
 
-#### Methods
-These methods have been provided to abstract away most of the math and logic involved in manipulating the grid data.
+### Methods
+The methods below have been provided to abstract away most of the math and logic involved in manipulating grid data.
 
-##### - `get(x, y)`
+#### `get`
+```javascript
+grid.get(x, y) === grid.data[x * grid.cols + y]
+```
 Returns the `data` value at `(x, y)`.
 
-```javascript
-world.get(12, 22) === world.data[22 * world.cols + 12]
-```
+
 
 If the provided cell is not in the grid, `null` is returned.
 
-##### - `set(value)(x, y)`
+#### `set`
+```javascript
+grid.set(value)(x, y)
+```
 Sets coordinate `(x, y)` in `data` to `value`. No errors will be thrown if the user attempts to set an out-of-bounds coordinate pair.
 
-`set` has been curried into a sequence of two functions, so it can be used in multiple ways:
-
-```javascript
-// Generic usage
-world.set(WALL)(x, y)
-```
+`set` has been curried into a sequence of two functions, so it can be used in other ways as well:
 
 ```javascript
 // Reusable version (ft. spreads)
@@ -116,26 +114,31 @@ world.set(FLOOR)
   (...cell3)
 ```
 
-#### - `contains(x, y)`
+#### `contains`
+```javascript
+grid.contains(x, y)
+```
 Determines if the provided cell is within the grid boundaries.
 
+#### `each`
 ```javascript
-Grid(16, 15).contains(16, 15) // false, because zero-based
+grid.each(callback)
 ```
-
-#### - `each(callback)`
 Iterates through each cell in the grid.
 
 ```javascript
 world.each((value, x, y) => world.set(WALL)(x, y))
 ```
 
-#### Properties
+### Properties
 
-##### - `cols`, `rows`
-The dimensions passed into the `Grid` factory, each corresponding to the width and height of the object represented.
+#### `cols`
+The amount of columns in (i.e. the width of) the grid, reflecting the value passed into the initial factory at instantiation.
 
-##### - `data`
+#### `rows`
+The amount of rows in the grid. Equivalent to the grid height.
+
+#### `data`
 A `Uint8ClampedArray` with a `length` of `cols * rows`. After instantiation, it will consist exclusively of zeros.
 
 ## License
