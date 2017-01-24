@@ -1,5 +1,5 @@
 # grid
-> Tiny library for storing and manipulating two-dimensional data.
+> tiny lib for storing and modifying two-dimensional data
 
 ## Introduction
 
@@ -127,7 +127,7 @@ Grid(16, 15).contains(16, 15) // false, because zero-based
 Iterates through each cell in the grid.
 
 ```javascript
-world.each((x, y) => world.set(WALL)(x, y))
+world.each((value, x, y) => world.set(WALL)(x, y))
 ```
 
 #### Properties
