@@ -35,7 +35,7 @@ module.exports = function Grid(cols, rows) {
       var x = i % cols
       var y = (i - x) / cols
       var value = get(x, y)
-      callback(value, x, y)
+      callback(x, y, value)
     }
   }
 }
