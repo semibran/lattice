@@ -71,9 +71,9 @@ That being said, let's jump into the specifics.
 ```javascript
 // NOTE: `Grid` is a factory, not a constructor.
 //       This helps the source stay clean and concise.
-var world = Grid(cols, rows)
+var world = Grid(cols, rows, data)
 ```
-Creates and returns a new `Grid` object with the specified dimensions.
+Creates and returns a new `Grid` object with the specified dimensions. If `data` is not provided, a `Uint8ClampedArray` will be created.
 
 ### Methods
 The methods below have been provided to abstract away most of the math and logic involved in manipulating grid data.
@@ -127,8 +127,10 @@ grid.each(callback)
 Iterates through each cell in the grid.
 
 ```javascript
-world.each((value, x, y) => world.set(WALL)(x, y))
+world.each((x, y, value) => world.set(WALL)(x, y))
 ```
+
+Return `true` at any time in the given callback to break out of the loop.
 
 ### Properties
 
