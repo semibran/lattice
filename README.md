@@ -25,7 +25,7 @@ World.prototype.clear = function () {
 }
 ```
 
-At first glance, such a system may look like a no-brainer to you. Getting and setting the value of  `world.data[y][x]` enables the access and modification of individual tiles. Pretty natural, right?
+At first glance, such a system may look like a no-brainer. Getting and setting the value of  `world.data[y][x]` enables the access and modification of individual tiles. Pretty natural, right?
 
 Don't get me wrong, due to its inherent simplicity and widespread use in beginner programming tutorials, I've actually used this kind of model countless times in the past. Recently, however, I've noticed that it's plagued by **two major flaws**:
 
@@ -45,7 +45,7 @@ tile = world.data[25][12] // Uncaught TypeError: Cannot read property '0' of und
 
 Here's another limitation of this system: when you access a column of an invalid row, you get a nasty error.
 
-Certainly there must be a better model to represent a game world that circumvents these issues?
+Certainly there must be a better way to model two-dimensional data that circumvents these issues!
 
 ## Enter `grid`
 `grid` uses a single `Uint8ClampedArray` to represent all our data, effectively limiting our possible array values to whole numbers from 0-255. Instead of using tile objects for each cell, each integer points to a unique instance in an external `tiles` array detailing individual properties like `solid` and `opaque`.
@@ -65,7 +65,15 @@ Not only does this method alleviate the creation of unnecessary tile objects, bu
 
 That being said, let's jump into the specifics.
 
-## Documentation
+## Installation
+```sh
+npm install --save semibran/grid
+```
+
+## Usage
+```javascript
+const Grid = require('grid')
+```
 
 ### Factory
 ```javascript
@@ -73,7 +81,7 @@ That being said, let's jump into the specifics.
 //       This helps the source stay clean and concise.
 var world = Grid(cols, rows, data)
 ```
-Creates and returns a new `Grid` object with the specified dimensions. If `data` is not provided, a `Uint8ClampedArray` will be created.
+Creates and returns a new `Grid` object with the specified dimensions. If `data` is not provided, a `Uint8ClampedArray` will be created from `cols` and `rows`.
 
 ### Methods
 The methods below have been provided to abstract away most of the math and logic involved in manipulating grid data.

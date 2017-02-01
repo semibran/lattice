@@ -1,0 +1,12 @@
+{
+  "name": "grid",
+  "version": "1.0.0",
+  "description": "Simple abstraction for storing and modifying two-dimensional data",
+  "license": "MIT",
+  "author": "Brandon Semilla <semibran@gmail.com>",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/semibran/grid.git"
+  }
+}
