@@ -1,6 +1,6 @@
 {
   "name": "grid",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simple abstraction for storing and modifying two-dimensional data",
   "license": "MIT",
   "author": "Brandon Semilla <semibran@gmail.com>",

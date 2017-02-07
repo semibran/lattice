@@ -36,7 +36,7 @@ module.exports = function Grid(cols, rows, data) {
       var x = i % cols
       var y = (i - x) / cols
       var value = get(x, y)
-      var result = callback(x, y, value)
+      var result = callback(value, x, y)
       if (result === true)
         break
     }

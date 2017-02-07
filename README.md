@@ -135,7 +135,7 @@ grid.each(callback)
 Iterates through each cell in the grid.
 
 ```javascript
-world.each((x, y, value) => world.set(WALL)(x, y))
+world.each((value, x, y) => world.set(WALL)(x, y))
 ```
 
 Return `true` at any time in the given callback to break out of the loop.
