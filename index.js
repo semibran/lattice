@@ -1,44 +1,26 @@
-module.exports = function Grid(cols, rows, data) {
+module.exports = Grid
+Grid.inside = inside
+Grid.get = get
+Grid.set = set
 
-  var area = cols * rows
-  if (!data)
-    data = new Uint8ClampedArray(area)
+function Grid(cols, rows, data) {
+	if (!data)
+		data = Array(cols * rows)
+	return { cols: cols, rows: rows, data: data }
+}
 
-  return {
-    cols: cols,
-    rows: rows,
-    data: data,
-    get: get, set: set,
-    contains: contains,
-    each: each
-  }
+function inside(grid, x, y) {
+	return x >= 0 && y >= 0 && x < grid.cols && y < grid.rows
+}
 
-  function get(x, y) {
-    if (!contains(x, y))
-      return null
-    return data[y * cols + x]
-  }
+function get(grid, x, y) {
+	if (!inside(grid, x, y))
+		return null
+	return grid.data[y * grid.cols + x]
+}
 
-  function set(value) {
-    return function set(x, y) {
-      if (contains(x, y))
-        data[y * cols + x] = value
-      return set
-    }
-  }
-
-  function contains(x, y) {
-    return x >= 0 && y >= 0 && x < cols && y < rows
-  }
-
-  function each(callback) {
-    for (var i = 0; i < area; i++) {
-      var x = i % cols
-      var y = (i - x) / cols
-      var value = get(x, y)
-      var result = callback(value, x, y)
-      if (result === true)
-        break
-    }
-  }
+function set(grid, x, y, value) {
+	if (!inside(grid, x, y))
+		return null
+	return grid.data[y * grid.cols + x] = value
 }
