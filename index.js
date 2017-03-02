@@ -1,20 +1,17 @@
-module.exports = Grid
+module.exports = function Grid(data, cols, rows) {
 
-function Grid(cols, rows, data) {
-	return { cols: cols, rows: rows, data: data || Array(cols * rows) }
-}
+	grid.data = data
+	grid.cols = cols
+	grid.rows = rows
 
-Grid.get = function (grid, x, y) {
-	if (!Grid.inside(grid, x, y))
-		return null
-	return grid.data[y * grid.cols + x]
-}
+	return grid
 
-Grid.set = function (grid, x, y, value) {
-	if (Grid.inside(grid, x, y))
-		grid.data[y * grid.cols + x] = value
-}
-
-Grid.inside = function (grid, x, y) {
-	return x >= 0 && y >= 0 && x < grid.cols && y < grid.rows
+	function grid(x, y, value) {
+		if (x < 0 || y < 0 || x >= cols || y >= rows)
+      return null
+    if (arguments.length === 2)
+      return data[y * cols + x]
+		data[y * cols + x] = value
+    return value
+	}
 }

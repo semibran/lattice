@@ -1,5 +1,5 @@
 # grid
-> Simple abstraction for storing and modifying two-dimensional data
+> Lightweight abstraction for storing and modifying two-dimensional data
 
 ## Installation
 ```sh
@@ -13,27 +13,23 @@ const Grid = require('grid')
 
 ### Factory
 ```javascript
-var grid = Grid(cols, rows[, data])
+var grid = Grid(data, cols, rows)
 ```
 Creates a new `Grid` instance with the given data and dimensions.
 
+The returned value is simply a function with the properties `data`, `cols` and `rows`.
+
 ### `get`
 ```javascript
-Grid.get(grid, x, y)
+grid(x, y)
 ```
 Gets the value at `(x, y)` on `grid`.
 
 ### `set`
 ```javascript
-Grid.set(grid, x, y, value)
+grid(x, y, value)
 ```
 Sets the `value` at `(x, y)` on `grid`.
-
-### `inside`
-```javascript
-Grid.inside(grid, x, y)
-```
-Determines if the given `(x, y)` pair is inside `grid`.
 
 ## License
 MIT

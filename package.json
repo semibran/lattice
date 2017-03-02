@@ -1,7 +1,7 @@
 {
   "name": "grid",
-  "version": "2.1.0",
-  "description": "Simple abstraction for storing and modifying two-dimensional data",
+  "version": "3.0.0",
+  "description": "Lightweight abstraction for storing and modifying two-dimensional data",
   "license": "MIT",
   "author": "Brandon Semilla <semibran@gmail.com>",
   "main": "index.js",
