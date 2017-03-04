@@ -7,11 +7,11 @@ module.exports = function Grid(data, cols, rows) {
 	return grid
 
 	function grid(x, y, value) {
-		if (x < 0 || y < 0 || x >= cols || y >= rows)
+		if (x < 0 || y < 0 || x >= grid.cols || y >= grid.rows)
       return null
     if (arguments.length === 2)
-      return data[y * cols + x]
-		data[y * cols + x] = value
+      return grid.data[y * grid.cols + x]
+		grid.data[y * grid.cols + x] = value
     return value
 	}
 }
