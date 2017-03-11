@@ -3,11 +3,7 @@ Grid.get = get
 Grid.set = set
 
 function Grid(data, cols, rows) {
-	return
-		{ data : data
-		, cols : cols
-		, rows : rows
-		}
+	return { data: data, cols: cols, rows: rows }
 }
 
 function get(grid, x, y) {
