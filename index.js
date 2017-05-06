@@ -1,23 +1,21 @@
-module.exports = Grid
-Grid.get = get
-Grid.set = set
+module.exports = { contains, index, cells }
 
-function Grid(data, cols, rows) {
-	return { data: data, cols: cols, rows: rows }
+function contains (grid, x, y) {
+	return x >= 0 && y >= 0 && x < grid.width && y < grid.height
 }
 
-function get(grid, x, y) {
-	if (contains(grid, x, y))
-		return grid.data[y * grid.cols + x]
+function index (grid, x, y) {
+	return y * grid.width + x
 }
 
-function set(grid, x, y, value) {
-	if (contains(grid, x, y)) {
-		grid.data[y * grid.cols + x] = value
-		return value
+function cells (grid) {
+	var width = grid.width
+	var height = grid.height
+	var cells = new Array(width * height)
+	for (var y = 0; y < height; y++) {
+		for (var x = 0; x < width; x++) {
+			cells[index(grid, x, y)] = { x, y }
+		}
 	}
-}
-
-function contains(grid, x, y) {
-	return x >= 0 && y >= 0 && x < grid.cols && y < grid.rows
+	return cells
 }

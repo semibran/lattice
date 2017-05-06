@@ -1,7 +1,7 @@
 {
   "name": "grid",
-  "version": "2.2.1",
-  "description": "Lightweight abstraction for storing and modifying two-dimensional data",
+  "version": "1.0.0",
+  "description": "Deduce information from data structures with width and height fields",
   "license": "MIT",
   "author": "Brandon Semilla <semibran@gmail.com>",
   "main": "index.js",

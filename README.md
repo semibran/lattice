@@ -1,41 +1,47 @@
 # grid
-> Lightweight abstraction for storing and modifying two-dimensional data
+> Deduce information from data structures with width and height fields
 
-## Installation
+In this module, a `grid` refers to any object with the fields `width` and `height`.
+
+## usage
+```javascript
+const { contains, index, cells } = require('grid')
+```
+
+### `contains`
+Determines if the given `x` and `y` coordinates lie inside the given `grid`.
+```javascript
+var grid = { width: 25, height: 25 }
+contains(grid, 4, 16) // true
+contains(grid, 25, 9) // false
+```
+
+### `index`
+Finds the corresponding one-dimensional index from the given `x` and `y` coordinates.
+```javascript
+world.tiles[index(world, 12, 12)] = 'wall'
+```
+This function is designed for use on one-dimensional arrays representing two-dimensional data. In the above example, `world` would look something like this:
+```javascript
+var world = {
+  width: 25,
+  height: 25,
+  tiles: new Array(25 * 25).fill('floor')
+}
+```
+
+### `cells`
+Constructs an array of length `grid.width * grid.height` consisting of cells within the bounds of the given `grid`.
+```javascript
+var nodes = cells(maze).filter(cell => cell.x % 2 && cell.y % 2)
+```
+A "cell" is just an object with the fields `x` and `y`, so it is possible to manipulate a cell with  [`vector2d`](https://github.com/semibran/vector2d) or a similar library.
+
+
+## install
 ```sh
 npm install semibran/grid
 ```
 
-## Usage
-```javascript
-const Grid = require('grid')
-```
-
-### Factory
-```javascript
-var grid = Grid(data, cols, rows)
-```
-Creates a new `Grid` instance with the given data and dimensions.
-
-The returned value is an object with the properties `data`, `cols` and `rows`, so the above factory is really just shorthand for the following:
-
-```javascript
-{ data: data, cols: cols, rows: rows }
-```
-
-### `get`
-```javascript
-Grid.get(grid, x, y)
-```
-Returns the value at `(x, y)` on `grid`, or `undefined` if out of range.
-
-### `set`
-```javascript
-Grid.set(grid, x, y, value)
-```
-Sets the `value` at `(x, y)` on `grid` and returns `value`.
-
-If the given position is out of range, the grid is not modified and `undefined` is returned.
-
-## License
+## license
 MIT
