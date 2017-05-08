@@ -1,11 +1,11 @@
 module.exports = { contains, index, cells }
 
-function contains (grid, x, y) {
-	return x >= 0 && y >= 0 && x < grid.width && y < grid.height
+function contains (grid, cell) {
+	return cell.x >= 0 && cell.y >= 0 && cell.x < grid.width && cell.y < grid.height
 }
 
-function index (grid, x, y) {
-	return y * grid.width + x
+function index (grid, cell) {
+	return cell.y * grid.width + cell.x
 }
 
 function cells (grid) {
@@ -14,7 +14,8 @@ function cells (grid) {
 	var cells = new Array(width * height)
 	for (var y = 0; y < height; y++) {
 		for (var x = 0; x < width; x++) {
-			cells[index(grid, x, y)] = { x, y }
+			var cell = { x, y }
+			cells[index(grid, cell)] = cell
 		}
 	}
 	return cells

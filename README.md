@@ -9,7 +9,7 @@ const { contains, index, cells } = require('grid')
 ```
 
 ### `contains`
-Determines if the given `x` and `y` coordinates lie inside the given `grid`.
+Determines if the given `cell` is inside the `grid` dimensions.
 ```javascript
 var grid = { width: 25, height: 25 }
 contains(grid, 4, 16) // true
@@ -17,7 +17,7 @@ contains(grid, 25, 9) // false
 ```
 
 ### `index`
-Finds the corresponding one-dimensional index from the given `x` and `y` coordinates.
+Finds the corresponding one-dimensional index from the given `cell`.
 ```javascript
 world.tiles[index(world, 12, 12)] = 'wall'
 ```
@@ -35,7 +35,7 @@ Constructs an array of length `grid.width * grid.height` consisting of cells wit
 ```javascript
 var nodes = cells(maze).filter(cell => cell.x % 2 && cell.y % 2)
 ```
-A "cell" is just an object with the fields `x` and `y`, so it is possible to manipulate a cell with  [`vector2d`](https://github.com/semibran/vector2d) or a similar library.
+A "cell" is just an object with the fields `x` and `y`, so it is possible to manipulate a cell with [`vector2d`](https://github.com/semibran/vector2d) or a similar library.
 
 
 ## install
