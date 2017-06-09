@@ -1,12 +1,15 @@
 {
-  "name": "grid",
-  "version": "1.0.0",
-  "description": "Deduce information from data structures with width and height fields",
-  "license": "MIT",
-  "author": "Brandon Semilla <semibran@gmail.com>",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/semibran/grid.git"
-  }
+ "name": "grid",
+ "version": "0.1.0",
+ "description": "Deduce information from data structures with width and height fields",
+ "keywords": [
+  "grid"
+ ],
+ "main": "index.js",
+ "license": "MIT",
+ "author": "Brandon Semilla (https://github.com/semibran)",
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/semibran/grid.git"
+ }
 }
