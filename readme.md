@@ -1,48 +1,62 @@
-# grid
-> Deduce information from data structures with width and height fields
+# lattice
+Multidimensional arrays are most efficiently expressed as flat, one-dimensional arrays containing the desired data in sequence. However, retrieving and modifying values from such an array often requires some complex math.
 
-In this module, a `grid` refers to any object with the fields `width` and `height`.
-
-## install
-```sh
-npm install semibran/grid
-```
+This module abstracts away said formulas to facilitate the use of flattened multidimensional arrays in your code.
 
 ## usage
-```javascript
-const { contains, project, cells } = require('grid')
+```js
+const { contains, flatten, project } = require('lattice')
 ```
 
-### `contains(grid, cell)`
-Determines if the given `cell` is inside the `grid` dimensions.
-```javascript
-var grid = { width: 25, height: 25 }
-contains(grid, { x: 4, y: 16 }) // true
-contains(grid, { x: 25, y: 9 }) // false
+### `contains(point, space) -> boolean`
+Determines if the given `point` is inside `space`.
+```js
+> var space = [25, 25]
+[25, 25]
+
+> contains([4, 16], space)
+true
+
+> contains([12, 25], space)
+false
 ```
 
-### `project(grid, cell)`
-Locates a `cell`'s corresponding one-dimensional index, or `null` if `cell` is out of bounds.
-```javascript
-var cell = { x: 12, y: 12 }
-var index = project(world, cell)
-world.tiles[index] = 'wall'
+### `flatten(point, space) -> index`
+Unwraps a point into its corresponding one-dimensional index.
+```js
+var index = flatten([12, 12], world.size)
+world.tiles[index] = 1
 ```
-This function is designed for use on one-dimensional arrays representing two-dimensional data. In the above example, `world` would look something like this:
-```javascript
+
+In the above example, `world` would be an object of the following form.
+```js
 var world = {
-  width: 25,
-  height: 25,
-  tiles: new Array(25 * 25).fill('floor')
+  size: [25, 25],
+  tiles: new Uint8Array(25 * 25)
 }
 ```
 
-### `cells(grid)`
-Constructs an array of length `grid.width * grid.height` consisting of cells within the bounds of the given `grid`.
-```javascript
-var nodes = cells(world).filter(cell => cell.x % 2 && cell.y % 2)
+This function is a dimension-agnostic implementation of [a common address calculation algorithm](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Address_calculation_in_general), which usually appears in the form `y * width + x` when reading from flattened two-dimensional arrays.
+
+### `project(index, space) -> point`
+Wraps an index into its corresponding multidimensional point.
+```js
+> project(312, [25, 25])
+[12, 12]
 ```
-Note that creating this many objects at once may be a rather slow operation, especially with larger grids. Consider caching the result whenever possible or avoid using this function altogether.
+```js
+game.state.map((alive, index) => {
+  var point = project(index, game.space)
+  var score = moore(1, game.space.length)
+    .map(neighbor => add(cell, neighbor))
+    .map(neighbor => wrap(neighbor, game.space))
+    .reduce((score, neighbor) => score + game.state[flatten(neighbor, game.space)], 0)
+  return score === 3 || score === 2 && alive
+})
+```
+
+## see also
+- [`semibran/vector`](https://github.com/semibran/vector) - basic operations for multidimensional vectors
 
 ## license
 [MIT](https://opensource.org/licenses/MIT) © [Brandon Semilla](https://git.io/semibran)

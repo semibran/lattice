@@ -1,26 +1,37 @@
-exports.contains = contains
-exports.project = project
-exports.cells = cells
-
-function contains(grid, cell) {
-  return cell.x >= 0 && cell.y >= 0 && cell.x < grid.width && cell.y < grid.height
-}
-
-function project(grid, cell) {
-  if (contains(grid, cell)) {
-    return cell.y * grid.width + cell.x
-  }
-}
-
-function cells(grid) {
-  var width = grid.width
-  var height = grid.height
-  var cells = new Array(width * height)
-  for (var y = 0; y < height; y++) {
-    for (var x = 0; x < width; x++) {
-      var cell = { x: x, y: y }
-      cells[project(grid, cell)] = cell
+exports.contains = function (point, space) {
+  var dimensions = point.length
+  for (var dimension = 0; dimension < dimensions; dimension++) {
+    var axis = point[dimension]
+    var size = space[dimension]
+    if (axis < 0 || axis >= size) {
+      return false
     }
   }
-  return cells
+  return true
+}
+
+exports.flatten = function (point, space) {
+  var dimensions = point.length
+  var index = 0
+  for (var dimension = 0; dimension < dimensions; dimension++) {
+    var size = 1
+    for (var i = 0; i < dimension; i++) {
+      size *= space[i]
+    }
+    index += size * point[dimension]
+  }
+  return index
+}
+
+exports.project = function (index, space) {
+  var point = new Array(dimensions)
+  for (var dimension = 0; dimension < dimensions; dimension++) {
+    var axis = index
+    for (var i = 0; i < dimension; i++) {
+      axis = (axis - point[i]) / space[i]
+    }
+    axis %= space[dimension]
+    point[dimension] = axis
+  }
+  return point
 }
