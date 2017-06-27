@@ -1,4 +1,4 @@
-exports.contains = function (point, space) {
+exports.contains = function (space, point) {
   var dimensions = point.length
   for (var dimension = 0; dimension < dimensions; dimension++) {
     var axis = point[dimension]
@@ -10,7 +10,7 @@ exports.contains = function (point, space) {
   return true
 }
 
-exports.flatten = function (point, space) {
+exports.flatten = function (space, point) {
   var dimensions = point.length
   var index = 0
   for (var dimension = 0; dimension < dimensions; dimension++) {
@@ -23,7 +23,7 @@ exports.flatten = function (point, space) {
   return index
 }
 
-exports.project = function (index, space) {
+exports.project = function (space, index) {
   var point = new Array(dimensions)
   for (var dimension = 0; dimension < dimensions; dimension++) {
     var axis = index
