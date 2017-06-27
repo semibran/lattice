@@ -1,7 +1,7 @@
 # lattice
 Multidimensional arrays are most efficiently expressed as flat, one-dimensional arrays containing the desired data in sequence. However, retrieving and modifying values from such an array often requires some complex math.
 
-This module abstracts away said formulas to facilitate the use of flattened multidimensional arrays in your code.
+This module abstracts away said formulas in the form of functions to facilitate the use of flattened multidimensional arrays in your code.
 
 ## usage
 ```js
